@@ -8,7 +8,7 @@
 
 ## デモ
 
-![デモはまだできてません](https://github.com/watelia/HP-congestion/edit/master/README.md)
+![デモはまだできてません](https://github.com/watelia/HP-congestion)
 
 
 ## 使い方
