@@ -1,5 +1,4 @@
 <?php
-session_start();
 header('X-FRAME-OPTIONS:DENY');
 
 function h($str)
