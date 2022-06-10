@@ -1,9 +1,13 @@
 <?php
 header('X-FRAME-OPTIONS:DENY');
 
-// $path = "./key.json";
-// $json = file_get_contents($path);
-// $array = json_decode($json, true);
+$path = "./key.json";
+$json = file_get_contents($path);
+$array = json_decode($json, true);
+
+$dsn = $array["dsn"];
+$db_user = $array["db_user"];
+$db_pass = $array["db_pass"];
 
 try {
     $pdo = new PDO($dsn, $db_user, $db_pass);
@@ -13,13 +17,13 @@ try {
 }
 
 
-function h($str)
-{
-    return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
-}
-
-if (isset($_POST['situation1'])) {
-    echo '１番を押された';
+if (isset($_POST["situation"])) {
+    $state = htmlspecialchars($_POST["situation"], ENT_QUOTES, "UTF-8");
+    if ($state >= 0 && $state < 6) {
+        $sqlq = "INSERT INTO congestion (state, time) VALUES (:stm, now())";
+        $stmt = $pdo->prepare($sqlq);
+        $stmt->execute(array(':stm' => $state));
+    }
 }
 ?>
 
