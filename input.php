@@ -1,7 +1,8 @@
 <?php
+date_default_timezone_set('Asia/Tokyo');
 header('X-FRAME-OPTIONS:DENY');
 
-$path = "./key.json";
+$path = "key.json";
 $json = file_get_contents($path);
 $array = json_decode($json, true);
 
