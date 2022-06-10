@@ -1,6 +1,18 @@
 <?php
 header('X-FRAME-OPTIONS:DENY');
 
+// $path = "./key.json";
+// $json = file_get_contents($path);
+// $array = json_decode($json, true);
+
+try {
+    $pdo = new PDO($dsn, $db_user, $db_pass);
+    echo "接続完了";
+} catch (PDOException $e) {
+    echo "接続エラー" . $e->getMessage();
+}
+
+
 function h($str)
 {
     return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
