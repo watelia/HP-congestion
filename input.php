@@ -1,14 +1,30 @@
 <?php
-session_start();
+date_default_timezone_set('Asia/Tokyo');
 header('X-FRAME-OPTIONS:DENY');
 
-function h($str)
-{
-    return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+$path = "key.json";
+$json = file_get_contents($path);
+$array = json_decode($json, true);
+
+$dsn = $array["dsn"];
+$db_user = $array["db_user"];
+$db_pass = $array["db_pass"];
+
+try {
+    $pdo = new PDO($dsn, $db_user, $db_pass);
+    echo "接続完了";
+} catch (PDOException $e) {
+    echo "接続エラー" . $e->getMessage();
 }
 
-if (isset($_POST['situation1'])) {
-    echo '１番を押された';
+
+if (isset($_POST["situation"])) {
+    $state = htmlspecialchars($_POST["situation"], ENT_QUOTES, "UTF-8");
+    if ($state >= 0 && $state < 6) {
+        $sqlq = "INSERT INTO congestion (state, time) VALUES (:stm, now())";
+        $stmt = $pdo->prepare($sqlq);
+        $stmt->execute(array(':stm' => $state));
+    }
 }
 ?>
 
@@ -31,16 +47,13 @@ if (isset($_POST['situation1'])) {
     <h1>X▶CUBE　ウェブページ混雑表示状況入力</h1>
 
     <!-- ここにメインの処理を書く -->
-
-
-
-    <form action="connect_test.php" method="POST">
-        <button type="button" class="btn btn-secondary btn-lg" name="situation0" value="0">0</button>
-        <button type="button" class="btn btn-primary btn-lg" name="situation1" value="1">1</button>
-        <button type="button" class="btn btn-info btn-lg" name="situation2" value="2">2</button>
-        <button type="button" class="btn btn-success btn-lg" name="situation3" value="3">3</button>
-        <button type="button" class="btn btn-warning btn-lg" name="situation4" value="4">4</button>
-        <button type="button" class="btn btn-danger btn-lg" name="situation5" value="5">5</button>
+    <form action="input.php" method="POST">
+        <input type="submit" name="situation" value="0" class="btn btn-secondary btn-lg">
+        <input type="submit" name="situation" value="1" class="btn btn-primary btn-lg">
+        <input type="submit" name="situation" value="2" class="btn btn-info btn-lg">
+        <input type="submit" name="situation" value="3" class="btn btn-success btn-lg">
+        <input type="submit" name="situation" value="4" class="btn btn-warning btn-lg">
+        <input type="submit" name="situation" value="5" class="btn btn-danger btn-lg">
     </form>
 
     <!-- Optional JavaScript -->

@@ -7,7 +7,6 @@ $array = json_decode($json, true);
 
 
 // 入力するダミーデータを設定
-// idはオートインクリメントなので何も入力しない
 $state = 4;
 
 
@@ -24,3 +23,5 @@ $stmt = $pdo->prepare($sqlq);
 
 // 実行
 $stmt->execute(array(':stm' => $state));
+
+?>
