@@ -22,6 +22,6 @@ mySQLでDBが少なくとも必要
 
 ## 文責
 
-* 作成者　Tello Romeo
+* 作成者　watelia
 * 所属　S Univ.
 * [Twitter](https://twitter.com/rnanaoplusmkai1)
