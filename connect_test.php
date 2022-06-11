@@ -23,5 +23,3 @@ $stmt = $pdo->prepare($sqlq);
 
 // 実行
 $stmt->execute(array(':stm' => $state));
-
-?>
