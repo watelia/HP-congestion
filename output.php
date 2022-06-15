@@ -14,7 +14,7 @@ $id = 1;
 
 try {
     $pdo = new PDO($dsn, $db_user, $db_pass);
-    echo "接続完了";
+    echo "";
 } catch (PDOException $e) {
     echo "接続エラー" . $e->getMessage();
 }
@@ -31,10 +31,10 @@ if ($res) {
     $data = $stmt->fetch();
 }
 
-date_default_timezone_set('Asia/Tokyo');
+// date_default_timezone_set('Asia/Tokyo');
 $timestamp = strtotime($data["time"]);
 $time = strtotime('now');
-$countertime = strtotime("-9 hour");
+$countertime = strtotime("+7 hour");
 $timediff = $countertime - $timestamp;
 
 $situation = "";
@@ -57,7 +57,7 @@ $situation = "";
 </head>
 
 <body>
-    <h1>X▶CUBE　ウェブページ混雑表示状況表示</h1>
+    <h1>混雑状況表示システム</h1>
 
     <main>
         <?php if ($timediff <= 7200) {
