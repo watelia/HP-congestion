@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('Asia/Tokyo');
+// date_default_timezone_set('Asia/Tokyo');
 header('X-FRAME-OPTIONS:DENY');
 
 $path = "key.json";
@@ -12,7 +12,7 @@ $db_pass = $array["db_pass"];
 
 try {
     $pdo = new PDO($dsn, $db_user, $db_pass);
-    echo "接続完了";
+    echo "";
 } catch (PDOException $e) {
     echo "接続エラー" . $e->getMessage();
 }
@@ -21,7 +21,7 @@ try {
 if (isset($_POST["situation"])) {
     $state = htmlspecialchars($_POST["situation"], ENT_QUOTES, "UTF-8");
     if ($state >= 0 && $state < 6) {
-        $sqlq = "INSERT INTO congestion (state, time) VALUES (:stm, now())";
+        $sqlq = "INSERT INTO congestion (state, time) VALUES (:stm, CURRENT_TIMESTAMP)";
         $stmt = $pdo->prepare($sqlq);
         $stmt->execute(array(':stm' => $state));
     }
