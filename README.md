@@ -17,11 +17,8 @@ mySQLでDBが少なくとも必要
 
 ### 補足
 
-当然ですが，SQL文は隠しています。
-
+具体性の低い説明でごめんなさい
 
 ## 文責
 
 * 作成者　watelia
-* 所属　S Univ.
-* [Twitter](https://twitter.com/rnanaoplusmkai1)
